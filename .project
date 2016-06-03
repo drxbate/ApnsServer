@@ -3,6 +3,7 @@
 	<name>ApnsServer</name>
 	<comment></comment>
 	<projects>
+		<project>Deamon</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

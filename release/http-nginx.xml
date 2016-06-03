@@ -1,0 +1,31 @@
+<uwsgi>
+<!--
+How to install uwsgi:
+sudo apt-get install uwsgi 
+ --> 
+        <plugin>python</plugin>
+        <chdir>/var/ApnsServer</chdir>
+        <pythonpath>/var/ApnsServer</pythonpath>
+        <module>webserver</module>
+        <callable>webserver</callable>
+        
+		<!--socket protocol-->
+        <protocol>socket</protocol>
+        <socket>/tmp/apns-app.sock</socket>
+		<!--socket protocol//end-->
+	
+		<!--http protocol-->
+		
+		<!--  
+		<stats>127.0.0.1:9090</stats>
+	    <http-socket>0.0.0.0:80</http-socket>        
+		-->
+		<!--http protocol//end-->
+        
+        
+        <master></master>
+        <processes>8</processes>
+        <memory-report/>
+        <pidfile>/tmp/ApnsServer-http.pid</pidfile>
+        <procname-master>ApnsServerHTTP</procname-master>
+</uwsgi>

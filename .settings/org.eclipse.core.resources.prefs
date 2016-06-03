@@ -1,0 +1,14 @@
+eclipse.preferences.version=1
+encoding//MSMQ/ApnsMQ.py=utf-8
+encoding//MSMQ/MessageQueue.py=utf-8
+encoding//Services/apns.py=utf-8
+encoding//libs/MessageCollection.py=utf-8
+encoding//libs/MultiProcess.py=utf-8
+encoding//libs/cache.py=utf-8
+encoding//libs/const.py=utf-8
+encoding//libs/daemon.py=utf-8
+encoding//libs/log.py=utf-8
+encoding//libs/setting.py=utf-8
+encoding//libs/task.py=utf-8
+encoding/runner.py=utf-8
+encoding/webserver.py=utf-8

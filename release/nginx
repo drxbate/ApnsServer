@@ -1,0 +1,41 @@
+server {
+        listen 80;
+
+        gzip on;
+        gzip_http_version 1.0;
+        gzip_disable "MSIE [1-6].";
+        gzip_types text/plain application/x-javascript text/css text/javascript;
+
+        #root /usr/share/nginx/html;
+        index index.html index.htm;
+
+        # Make site accessible from http://localhost/
+        #server_name localhost;
+        server_name wx.sinyi.com.cn;
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                #try_files $uri $uri/ =404;
+                # Uncomment to enable naxsi on this location
+                # include /etc/nginx/naxsi.rules
+                uwsgi_pass   unix:/tmp/wechat-app.sock;
+                include      uwsgi_params;
+                uwsgi_param  UWSGI_SCHEME $scheme;
+                uwsgi_param  SERVER_SOFTWARE    nginx/$nginx_version;
+        }
+
+		location /_static {
+			root /var/apps/wechat-Cor/www;
+		}
+
+        location /4f8529527d452829b0be2bfb5b76fd3f.txt {
+                root /var/apps/html;
+        }
+
+
+        location /_doc {
+        		#ln /var/apps/repo/destination /var/apps/www/_doc
+               root /var/apps/www;
+        }
+}
