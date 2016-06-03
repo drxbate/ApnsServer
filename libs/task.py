@@ -7,24 +7,37 @@ Created on 2015年10月30日
 '''
 
 from log import Logger,INFO,DEBUG
-
+import os,time
 
 class Task:
     __tasks__={}
     def __init__(self,name,log_level=INFO):
         self.logger=Logger.regist("TASK-%s"%name, {"mode":"SYSLOG","name":"TASK-%s"%name,"level":log_level})
         Task.__tasks__[name]=self
-        
+        self.name=name
         
     def __call__(self,func):
         self.__func__=func
     
     def __call_method__(self):
+        lockfile="/tmp/%s-lock"%self.name
+        if os.path.exists(lockfile):
+            self.logger.warn("Task %s is RUNNING. Cannot start new one."%self.name)
+            return
+
+        f=file(lockfile,"w")
+        ts=time.time()
+        f.write("%0.6f"%ts)
+        f.close()
+
+
         try:
             self.__func__()
         except:
             self.logger.error("error",exc_info=True)
     
+        L.info("Task %s is DONE, during %0.6f（seconds）"%(self.name,time.time()-ts))
+        os.remove(lockfile)
 
 class L(object):
     def __init__(self,name):
